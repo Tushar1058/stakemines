@@ -1,0 +1,361 @@
+:root {
+    --size: 90px;
+}
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f212e;;
+    transition: background-color 0.3s ease; 
+}
+.game-container {
+    
+    margin-left: -40em;
+    margin-top: 3em;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow items to wrap for smaller screens */
+}
+.mines-wrap {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 13px 10px;
+    width: fit-content;
+}
+.mines-blk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--size);
+    width: var(--size);
+    background: #2f4553;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 0 #213743;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+.mines-blk img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    display: none;
+}
+
+
+.mines-blk.revealed {
+    display: block;
+   
+    box-shadow: none; /* Remove the shadow when revealed */
+    background: #1b2a35; /* Adjust to match your background color */
+}
+.mines-blk:hover:not(.revealed) {
+    background: #4e7185;
+    transform: translatey(-3px);
+}
+.mines-blk.blink {
+    animation: blink 2s;
+}
+.mines-blk.revealed:hover {
+    cursor: default;
+    background: #2f4553;
+}
+@keyframes blink {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25%, 75% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+.contain{
+    text-align: center;
+    height: 5em;
+    width: 30em;
+    margin-right: -30em;
+    margin-top: -35em;
+}
+.update{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   color: rgb(0, 255, 102);
+   font-size: 1.7em;
+   text-align: center;
+   position: relative;
+   margin-left: -47em;
+}
+
+.text{
+    color: white;
+    font-size: 1em;
+    margin-top: -0.5em;
+    text-align: center;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.menu-wrap {
+    margin-top: -20em;
+    margin-left: 40em;
+    width:20em;
+    height: 15em;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #1c3a48;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 0 #142a37;
+}
+.menu-wrap h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+.menu-wrap label {
+    
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+.menu-wrap input {
+    height: 3em;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.menu-wrap button {
+    height: 3em;
+    width: 70%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #0c67c9;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1em;
+}
+.abc{
+    display: flex;
+    gap: 2em;
+    width: 100%;
+}
+
+#betButton3{
+    background-color: rgb(178, 15, 36);
+}
+.menu-wrap button:hover {
+    background: #4e7185;
+}
+.menu-wrap p {
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+.menu-wrap2 {
+    margin-left: 40em;
+    position: absolute;
+    margin-top: 20em;
+    width:20em;
+    height: 22em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #1c3a48;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 0 #142a37;
+}
+.menu-wrap2 h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+.menu-wrap2 label {
+    
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+.menu-wrap2 input {
+    height: 3em;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.menu-wrap2 button {
+    height: 4em;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #0cc91f;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1em;
+}
+
+
+.menu-wrap2 button:hover {
+    background: #099016;
+}
+#betButton{
+    margin-top: 1em;
+}
+#findButton {
+    background: #ffc107; /* Yellow color for the Find button */
+    color: #ffffff; /* Black text color for better contrast */
+}
+
+#findButton:hover {
+    background: #e0a800; /* Darker yellow for the Find button on hover */
+}
+@media (max-width: 768px) {
+    :root {
+        --size: 80px; /* Adjust block size for smaller screens */
+    }
+
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #0f212e;
+        transition: background-color 0.3s ease;
+    }
+
+    .game-container {
+        display: flex;
+        flex-direction: column; /* Stack game elements vertically */
+        align-items: center;
+        justify-content: center; /* Center the game container vertically */
+        width: 100%;
+        height: 20em;
+        padding: 1em;
+        box-sizing: border-box;
+        margin-top: -25em;
+        margin-left: 4em;
+    }
+
+    .mines-blk{
+        box-shadow: 0 3px 0 #213743;
+    }
+    .mines-wrap {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* Keep 5x5 grid for smaller screens */
+        gap: 6px 4px;
+    }
+
+    .menu-wrap {
+        width: 100%;
+        max-width: 20em;
+       height: 4em;
+       overflow: hidden;
+        box-shadow: none;
+        margin-top: 35em;
+        text-align: center;
+        box-shadow: 0 5px 0 #142a37;
+        margin-left: 0em;
+
+    }
+
+    .menu-wrap2 {
+        width: 100%;
+        
+        max-width: 20em;
+        margin-top: 63em;
+        margin-left: 0em;
+        box-shadow: none;
+         /* Margin to separate from other elements */
+        text-align: center;
+        box-shadow: 0 5px 0 #142a37;
+    }
+    .menu-wrap2 h2 {
+        font-size: 1.5em;
+    }
+
+    .menu-wrap2 button, .menu-wrap2 input {
+        width: 100%; /* Full width buttons and input fields for easier tapping */
+        padding: 10px;
+        margin-bottom: 1em; /* Space between buttons/inputs */
+    }
+
+    .waiting-message {
+        font-size: 2em;
+        color: white;
+        position: absolute;
+        top: 50%; /* Center vertically */
+        left: 50%; /* Center horizontally */
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        text-align: center;
+        z-index: 2;  /* Higher z-index to ensure it's above other elements */
+    }
+
+    #betButton{
+        margin-top: 0em;
+    }
+
+    .contain{
+        text-align: center;
+        height: 5em;
+        width: 30em;
+        margin-right: 20px;
+        margin-top: -10px;
+        z-index: 3;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --size: 50px; /* Further adjust block size for smaller screens */
+    }
+
+    .mines-wrap2 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* Keep 5x5 grid for smaller screens */
+        gap: 8px 6px;
+    }
+}
+
+
+.waiting-message {
+    font-size: 2em;
+    color: white;
+    position: absolute;
+   
+    transform: translateX(-50%);
+    padding: 20px;
+    text-align: center;
+    z-index: 2;  /* Higher z-index to ensure it's above other elements */
+}
+
+
+
+
