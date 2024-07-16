@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <div class="logo">Stake</div>
+        <div class="balance-container">
+            <div class="balance-box">
+                <span class="balance">₹ 100</span>
+            </div>
+            <button class="wallet-button">Wallet</button>
+        </div>
+        
+    </header>
+
+    <!-- Existing content -->
     <div class="waiting-message" id="waitingMessage" style="display:none;">
         <!-- Waiting message will be shown here -->
     </div>
@@ -15,21 +28,54 @@
         <text class="update" id="resultMessage"></text>
     </div>
 
-    <div class="menu-wrap" id="balanceMenu">
-        <h2>Balance : <span class="text">₹ 100</span></h2>
-        <div class="abc">
-            <button id="betButton2">Deposit +</button>
-            <button id="betButton3">Withdraw</button>
+
+    <div class="betting-menu">
+        <h2 id="h2">Account Type</h2>
+        <div class="account-switch">
+            <button id="realAccount" class="active">Real</button>
+            <button id="demoAccount">Demo</button>
+            <div class="switch-toggle"></div>
         </div>
-        <button id="reveal-mines-btn">Reveal Mines</button>
-    </div>
-    <div class="menu-wrap2">
-        <h2>Menu</h2>
-        <label for="betAmount">Bet Amount:</label>
-        <input type="number" id="betAmount" min="10" value="10">
-        <button id="findButton">Find</button>
+    
+        <div id="betSection">
+            <div class="bet-header">
+                <h2 id="bethead">Bet Amount</h2>
+                <span class="bet-total">₹ 100</span>
+            </div>
+            <div class="bet-controls">
+                <div class="bet-amount">
+                    <button id="minusButton">-</button>
+                    <span id="betDisplay">₹ 1000</span>
+                    <button id="plusButton">+</button>
+                </div>
+                <div class="bet-options">
+                    <button id="halfButton">1/2</button>
+                    <button id="doubleButton">2x</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="slider-container" class="slider-container">
+            <div class="marks">
+              <span data-value="0" class="mark">100</span>
+              <span data-value="200" class="mark">200</span>
+              <span data-value="500" class="mark">500</span>
+              <span data-value="1000" class="mark">100</span>
+            </div>
+            <!-- Input range slider without adding a new one -->
+             <div class="outer-slider">
+            <input type="range" min="0" max="1000" value="0" class="slider" id="customSlider">
+        </div>
+          </div>
+          <button id="findButton">Find</button>
         <button id="betButton" >Bet</button>
+        
+        <div class="payout" id="payoutSection">
+            Your Payout : <span id="payoutDisplay">₹ 200</span>
+        </div>
+        
     </div>
+
 
     <div id="gameContainer" class="game-container" style="display:none;">
         <div class="mines-wrap" id="minesWrap">
@@ -40,7 +86,96 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
     <script>
-        // Function to reveal or hide mines based on current state
+
+document.addEventListener('DOMContentLoaded', () => {
+    const realAccountButton = document.getElementById('realAccount');
+    const demoAccountButton = document.getElementById('demoAccount');
+    const switchToggle = document.querySelector('.switch-toggle');
+    const betSection = document.getElementById('betSection');
+    const payoutSection = document.getElementById('payoutSection');
+    const sliderSection = document.getElementById('slider-container');
+    const body = document.body; // Assuming you are adding classes to the body
+
+    realAccountButton.addEventListener('click', () => {
+        realAccountButton.classList.add('active');
+        demoAccountButton.classList.remove('active');
+        switchToggle.style.left = '5px'; // Adjust to match the CSS
+        betSection.style.display = 'flex'; // Show the bet section
+        payoutSection.style.display = 'block';
+        sliderSection.style.display = 'block';  // Show the payout section
+        body.classList.add('real-mode');
+        body.classList.remove('demo-mode');
+    });
+
+    demoAccountButton.addEventListener('click', () => {
+        demoAccountButton.classList.add('active');
+        realAccountButton.classList.remove('active');
+        switchToggle.style.left = '141px'; // Adjust to match the CSS
+        betSection.style.display = 'none'; // Hide the bet section
+        payoutSection.style.display = 'none';
+        sliderSection.style.display = 'none'; // Hide the payout section
+        body.classList.add('demo-mode');
+        body.classList.remove('real-mode');
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const slider = document.getElementById('customSlider');
+  const marks = document.querySelectorAll('.mark');
+  const sliderWidth = slider.offsetWidth;
+  const markPositions = [
+    { value: 0, position: 0 },
+    { value: 100, position: 100 / parseInt(slider.max) * sliderWidth },
+    { value: 200, position: 200 / parseInt(slider.max) * sliderWidth },
+    { value: 500, position: 500 / parseInt(slider.max) * sliderWidth },
+    { value: 1000, position: 1000 / parseInt(slider.max) * sliderWidth },
+  ];
+
+  function updateMarks() {
+    const sliderValue = parseInt(slider.value);
+
+    marks.forEach((mark, index) => {
+      const markValue = parseInt(mark.dataset.value);
+      const nextMarkValue = index < marks.length - 1 ? parseInt(marks[index + 1].dataset.value) : parseInt(slider.max);
+
+      // Remove highlight from all marks
+      mark.classList.remove('highlight');
+
+      // Highlight the closest mark based on slider value
+      if (sliderValue >= markValue && sliderValue < nextMarkValue) {
+        const distanceToCurrent = Math.abs(sliderValue - markValue);
+        const distanceToNext = Math.abs(nextMarkValue - sliderValue);
+
+        // Highlight the closest mark
+        if (distanceToCurrent <= distanceToNext) {
+          mark.classList.add('highlight');
+        } else {
+          marks[index ].classList.add('highlight');
+        }
+      }
+
+      // Special case: Highlight 1000 mark when slider is past a certain threshold after 500
+      if (sliderValue > 800 && markValue === 1000) {
+        const threshold = 600; // Adjust this threshold as needed
+        if (sliderValue > threshold) {
+          mark.classList.add('highlight');
+        }
+      }
+
+      // Remove highlight from 500 mark when slider is past 800
+      if (sliderValue > 800 && markValue === 500) {
+        mark.classList.remove('highlight');
+      }
+    });
+  }
+
+  slider.addEventListener('input', updateMarks);
+  updateMarks(); // Initial call to set the mark highlights on page load
+});
+
+
+
+      // Function to reveal or hide mines based on current state
         function revealMinesForTesting() {
             const buttons = document.querySelectorAll('.mines-blk');
             buttons.forEach((button, index) => {
@@ -59,8 +194,9 @@
         const revealMinesButton = document.getElementById('reveal-mines-btn');
         revealMinesButton.addEventListener('click', revealMinesForTesting);
 
-
-       
+        
+        
     </script>
+    
 </body>
 </html>
