@@ -212,12 +212,14 @@ header {
     }
     .slider-container{
         position: absolute;
+        margin: 50px auto;
     }
     #slider-container{
         margin-top: 50px;
         margin-bottom: 0px;
     }
     .slider{
+        height: 20px;
         border-radius: 10px;
         overflow: hidden;
         padding-left: 3px;
@@ -307,7 +309,7 @@ header {
         box-shadow: 0 5px 0 #142a37;
     }
     .betting-menu h2 {
-        font-size: 1.5em;
+        font-size: 1em;
     }
 
     .betting-menu button, .betting-menu input {
@@ -356,24 +358,26 @@ header {
 
     #h2 {
         margin-bottom: 10px;
-        font-size: 1.5em;
+        font-size: 1em;
     }
     
     .account-switch {
         margin-top: 15px;
         position: relative;
         display: flex;
-        min-width: 90%; /* Adjust width as needed */
-        min-height: 60px; /* Adjust height as needed */
+        max-width: 70%; /* Adjust width as needed */
+        min-height: 40px; /* Adjust height as needed */
         background: rgba(14, 33, 46, 1);
         border-radius: 50px;
         overflow: hidden;
         margin-bottom: 20px;
-        margin-left: 5%;  
+        margin-left: 15%;  
+        align-items: center;
+        text-align: center;
     }
 
     #realAccount, #demoAccount{
-        font-size: 1.2em;
+        font-size: 1em;
     }
     .account-switch button {
         flex: 1;
@@ -383,19 +387,24 @@ header {
         cursor: pointer;
         z-index: 1;
         font-size: 16px;
-        padding-top: 6%;
+        padding-top: 10%;
     }
-    
+    #realAccount{
+        padding-left: 10%;
+    }
+    #demoAccount{
+        padding-right: 8%;
+    }
     .account-switch button.active {
         color: white;
     }
     
     .switch-toggle {
         position: absolute;
-      margin-left: 0.7%;
-      margin-top: 0.7%;
-        min-width: 45%; /* Adjust width to fit half of the container width minus padding */
-        min-height: 45px; /* Adjust height to fit the inner container height minus padding */
+      margin-left: 0.3%;
+      margin-top: 0.3%;
+        max-width: 50%; /* Adjust width to fit half of the container width minus padding */
+        max-height: 38px; /* Adjust height to fit the inner container height minus padding */
         background: #2f4553;
         border-radius: 50px;
         transition: left 0.3s ease;
@@ -406,7 +415,7 @@ header {
     }
     
     #demoAccount.active ~ .switch-toggle {
-        margin-left: 10%; /* Adjust left position to fit the toggle within the container */
+        margin-left: -14%; /* Adjust left position to fit the toggle within the container */
     }
 
 
@@ -434,12 +443,12 @@ header {
     }
     
     #bethead{
-        font-size: 1.5em;
+        font-size: 1em;
     }
    
     
     .bet-header .bet-total {
-        font-size: 1.5em;
+        font-size: 1em;
      }  
 
 
@@ -447,8 +456,8 @@ header {
         display: flex;
         align-items: center;
         padding: 3% 3%;
-        width: 100%;
-        min-height: 70px;
+        max-width: 95%;
+        min-height: 50px;
     }
     
     .bet-amount {
@@ -464,33 +473,34 @@ header {
     }
     #plusButton{
         margin-right: 1%;
-        margin-top: 7%;
+        margin-top: 7%
     }
     .bet-amount button {
         background: rgba(48, 69, 83, 1);
         border: none;
         color: white;
         cursor: pointer;
-        min-width: 40px;
-        min-height: 40px;
+        min-width: 20px;
+        min-height: 20px;
         border-radius: 5px;
         transition: background 0.3s ease;
         font-size: 16px;
+        padding: 3px 5px;
     }
     
    #betDisplay{
     min-width: 40%;
-    font-size: 1.5em;
-    margin-left: 10%;
+    font-size: 1.2em;
+    margin-left: 12%;
     margin-right: 12%;
    }
     
    #halfButton, #doubleButton{
-    font-size: 1em;
+    font-size: 0.8em;
    }
   
    #slider-container{
-    margin-top: 3em;
+    margin-top: -1em;
     margin-bottom: 0;
    }
    .slider-container{
@@ -499,37 +509,38 @@ header {
    }
 
    .outer-slider{
-    min-height: 30px;
+    max-height: 30px;
+    max-width: 90%;
   }
 
    .slider {
     max-width: 100%;
     padding-left: 10px;
     padding-right: 10px;
-    min-height: 24px;
+    max-height: 1.5em;
     border-radius: 20px;
   }
 
   .slider::-webkit-slider-thumb {
-    min-width: 30px;
-    min-height: 35px;
+    max-width: 20px;
+    min-height: 20px;
     cursor: pointer;
     border-radius: 50%;
   }
 
   #findButton{
-    max-width:98%;
+    max-width:90%;
     min-height: 12%;
   }
   .betting-menu button#findButton {
-    margin-bottom: 5%;
+    margin-bottom: 3%;
     font-size: 1em;
   }
   .betting-menu button#betButton {
     font-size: 1em;
   }
   #betButton{
-    max-width:98%;
+    max-width:90%;
     min-height: 12%;
   }
 
@@ -540,12 +551,22 @@ header {
 
   .payout {
     margin-left: 10px;
-    font-size: 1.3em;
+    font-size: 1em;
     margin-top: 10px;
     }
 
 }
+@media (max-height:850px)
+{
+    #slider-container{
+        margin-top: 2em;
+        margin-bottom: 0;
+       }
 
+    .betting-menu{
+        min-height: 40em;
+    }
+}
 
 .betting-menu h2 {
     margin-bottom: 10px;
@@ -826,7 +847,6 @@ header {
     width: 100%;
     -webkit-appearance: none;
     appearance: none;
-    height: 20px;
     background: rgba(14, 33, 46, 1);
     outline: none;
   /* Adjusted margin to make space for marks */
@@ -855,7 +875,7 @@ header {
 
   .slider-container {
     width: 100%;
-    margin: 50px auto;
+    
     position: relative;
     display: flex;
     flex-direction: column;
